@@ -2,6 +2,7 @@ package com.prasanth.module.Rouge;
 
 import java.io.Serializable;
 
+
 public class LinkedListStruct<T> implements Serializable, Cloneable {
 	private static final long serialVersionUID = -8956337161364858688L;
     
@@ -81,7 +82,7 @@ public class LinkedListStruct<T> implements Serializable, Cloneable {
 		tail=temp.next;
 		length++;
 	}
-	
+	//dispaly details
 	public void getLinkedList()
 	{
 		Node temp=head;
@@ -102,6 +103,73 @@ public class LinkedListStruct<T> implements Serializable, Cloneable {
 		temp=temp.next;
 		}
 	}
+
+	
+
+	
+	public void reverseLinkedList() {
+		
+              
+		this.head=reverseLinkedList(this.head);
+	}
+	private Node reverseLinkedList(Node head) {
+		
+		Node temp=null;
+		while(head!=null)
+		{
+			Node next=head.next;
+			head.next=temp;
+			temp=head;
+			head=next;
+		}
+		
+		System.out.println("done");
+		return temp;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public LinkedListStruct<T> insertAlternatev2(LinkedListStruct<?> data) {
+		Node<Integer> l1 = (LinkedListStruct<T>.Node<Integer>) this.getHead();
+		Node<Integer> l2 = (LinkedListStruct<T>.Node<Integer>) data.getHead();
+		Node<Integer> hold = null;
+
+//		Boolean flagSwitch = true;
+		while (l1.getNext() != null && l2.getNext() != null) {
+			hold = l1.next;
+			l1.next = l2;
+			l1 = l2;
+			l2 = hold;
+
+		}
+		return this;
+	}
+	
+	public void reverseListToKposition(int k)
+	{
+		  Node temp=this.head;
+		  if(k==0)
+		  {
+			  reverseLinkedList();
+			  return;
+		  }
+		  
+		  try {
+			  
+		  while(temp.getNext()!=null && k>0)
+		  {
+			  temp=temp.getNext();
+			  k--;
+		  }
+		  temp.next=reverseLinkedList(temp.next);
+		  }catch(NullPointerException nulP)
+		  {
+			  nulP.printStackTrace();
+			  System.out.println(k+"value is greater than length"+this.length);
+		  }
+		  
+		
+	}
+	
 	
 	public LinkedListStruct<T> insertAlternate(LinkedListStruct<T> data)
 	{
@@ -128,7 +196,7 @@ public class LinkedListStruct<T> implements Serializable, Cloneable {
 	
 	
 	
-	
+/// do not touch	
 	
 	private class Node<T>
 	{
